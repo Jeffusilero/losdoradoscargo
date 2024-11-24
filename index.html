@@ -10,27 +10,37 @@ include 'includes/conecta.php';
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<form action="">
+<form action="registro.php" name="registro" method="post">
     <img src="./img/LOS DORADOS.png" alt="los dorados cargos" width="140px">
     <h2>oficina</h2>
     <div class="clas_1">
-        <label for="guia">GUIA</label>
+        <label for="guia">Consulta</label> <br>
         <input type="text" name="guia" id="guia" placeholder="GUA45603215330">
-    </div>
-    <div class="clas_1">
-        <label for="nombre">NOMBRE</label>
-        <input type="text" name="nombre" id="nombre" placeholder="Petita">
-    </div>
 
-
+<br><br>
     <div class="boton">
-        <button name="consulta" value="Enviar">Consulta</button>
+        <button name="consulta" value="Enviar">Registrar</button>
+    </div>
+    <br>
+    <div>
+        <table class="tabla">
+            <thead>
+                <th class="cuadro">GUIA</th>
+                <th class="cuadro">NOMBRE </th>
+                <th class="cuadro">TELEFONO</th>
+                <th class="cuadro">POSICION</th>
+            </thead>
+            <tbody id="content">
+
+            </tbody>
+        </table>
+    </div>
+    
+    <div>
+
     </div>
 
-    <div class="clas_2">
-        <label for="resultado"></label>
-        <input type="text" name="resultado" placeholder="PETITA ASENCIO ">
-    </div>
+
 </form>
 </body>
 </html>
