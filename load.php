@@ -20,17 +20,23 @@ $html = "";
 
 if ($num_rows > 0) {
     while ($row = $resultado->fetch_assoc()) {
-        $output['data'] .= '<tr>';
-        $output['data'] .= '<td>' . $row['no_emp'] . '</td>';
-        $output['data'] .= '<td>' . $row['nombre'] . '</td>';
-        $output['data'] .= '<td>' . $row['apellido'] . '</td>';
-        $output['data'] .= '<td>' . $row['fecha_nacimiento'] . '</td>';
-        $output['data'] .= '<td>' . $row['fecha_ingreso'] . '</td>';
-        $output['data'] .= '<td><a class="btn btn-warning btn-sm" href="editar.php?id=' . $row['no_emp'] . '">Editar</a></td>';
-        $output['data'] .= "<td><a class='btn btn-danger btn-sm' href='elimiar.php?id=" . $row['no_emp'] . "'>Eliminar</a></td>";
-        $output['data'] .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td>' . $row['guia'] . '</td>';
+        $html .= '<td>' . $row['nombre'] . '</td>';
+        $html .= '<td>' . $row['telefono'] . '</td>';
+        $html .= '<td>' . $row['posicion'] . '</td>';
+        $html .= '</tr>';
+        
     }
+}   
+else {
+    $html .= '<tr>';
+    $html .= '<td colspan="7">Sin resultado</td>';
+    $html .= '</tr>';
 }
+
+
+
 
 
 

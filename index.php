@@ -1,14 +1,12 @@
-<?php
-//
-include 'includes/conecta.php';
-?>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DORADOS</title>
+    <title>Oficina</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
+
 <body>
 <form action="registro.php" name="registro" method="post">
     <img src="./img/LOS DORADOS.png" alt="los dorados cargos" width="140px">
