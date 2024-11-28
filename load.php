@@ -1,22 +1,42 @@
 <?php 
 
 
-require 'conecta.php';
+require 'config.php';
 
-$columns = ['guia' , 'nombre', 'telefono', 'posicion'];
+$columns = ['guia' , 'nombre', 'telefono', 'ubicacion'];
 
-$table = "oficina";
+$table = "clientes";
 
-$id = 'guia';
 
-$campo = $conn->real_escape_string($_POST['campo']) ?? null;
+$campo = isset($_POST['campo']) ? $conn->real_escape_string($_POST['campo']) : null;
 
+$where = '';
+
+if($campo != null){
+    $where = "  WHERE (";
+
+    $cont = count($columns);
+    for($i = 0;$i < $cont; $i++){
+        $where .= $columns [$i] . " LIKE '%". $campo ."%' OR ";
+    }
+    $where = substr_replace($where, "", -3);
+    $where .=")";
+}
+/* limit */
+
+$limit = isset($_POST['registro']) ? $conn->real_escape_string($_POST['registro']) : 5; 
+$sLimit = "LIMIT $limit";
+
+/* consulta */
 $sql = "SELECT " . implode(", ", $columns) . "
-FROM $table";
+FROM $table
+$where
+$sLimit";
 $resultado =$conn->query($sql);
 $num_rows = $resultado->num_rows;
 
-$html = "";
+/* mostrando resultados*/
+$html = '';
 
 if ($num_rows > 0) {
     while ($row = $resultado->fetch_assoc()) {
@@ -24,17 +44,20 @@ if ($num_rows > 0) {
         $html .= '<td>' . $row['guia'] . '</td>';
         $html .= '<td>' . $row['nombre'] . '</td>';
         $html .= '<td>' . $row['telefono'] . '</td>';
-        $html .= '<td>' . $row['posicion'] . '</td>';
+        $html .= '<td>' . $row['ubicacion'] . '</td>';
+        $html .= '<td><a class="btn btn-warning btn-sm" href="editar.php?id=' . $row['guia'] . '">Editar</a></td>';
+        $html .= "<td><a class='btn btn-danger btn-sm' href='eliminar.php?id=" . $row['guia'] . "'>Eliminar</a></td>";
         $html .= '</tr>';
         
     }
 }   
 else {
     $html .= '<tr>';
-    $html .= '<td colspan="7">Sin resultado</td>';
+    $html .= '<td colspan="4">Sin resultado</td>';
     $html .= '</tr>';
 }
 
+echo json_encode($html, JSON_UNESCAPED_UNICODE);
 
 
 
@@ -59,7 +82,8 @@ else {
 
 
 
-$where = '';
+
+/*$where = '';
 
 if ($campo != null) {
     $where = "WHERE (";
@@ -161,4 +185,4 @@ if ($totalRegistros > 0) {
     $output['paginacion'] .= '</nav>';
 }
 
-echo json_encode($output, JSON_UNESCAPED_UNICODE);
+echo json_encode($output, JSON_UNESCAPED_UNICODE);*/
